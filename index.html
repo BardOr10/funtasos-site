@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Funtasos Studios — AI media studio for films, series, commercials and dubbing." />
+  <meta name="theme-color" content="#070707" />
+  <title>Funtasos Studios</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#070707;
+      --bg-soft:#0d0d0f;
+      --panel:rgba(255,255,255,.055);
+      --line:rgba(255,255,255,.12);
+      --text:#f4f0e8;
+      --muted:#aaa7a0;
+      --gold:#c6a46a;
+      --gold-2:#f0d7a6;
+      --shadow:0 24px 80px rgba(0,0,0,.45);
+      --radius:24px;
+      --max:1180px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      background:
+        radial-gradient(circle at 20% 5%, rgba(198,164,106,.11), transparent 30%),
+        linear-gradient(180deg,#080808 0%,#050505 100%);
+      color:var(--text);
+      font-family:"Assistant",system-ui,sans-serif;
+      line-height:1.6;
+      overflow-x:hidden;
+    }
+    html[lang="en"] body{font-family:"Inter",system-ui,sans-serif}
+    a{color:inherit;text-decoration:none}
+    img{display:block;max-width:100%}
+    button,input,textarea{font:inherit}
+    .wrap{width:min(var(--max),calc(100% - 40px));margin-inline:auto}
+    .nav{
+      position:fixed;inset:0 0 auto 0;z-index:50;
+      background:linear-gradient(180deg,rgba(5,5,5,.9),rgba(5,5,5,.45),transparent);
+      backdrop-filter:blur(10px);
+    }
+    .nav-inner{
+      height:88px;display:flex;align-items:center;justify-content:space-between;gap:24px
+    }
+    .brand{display:flex;align-items:center;gap:14px;min-width:0}
+    .brand img{width:148px;height:auto;filter:drop-shadow(0 6px 24px rgba(0,0,0,.4))}
+    .nav-links{display:flex;align-items:center;gap:28px;color:#ddd8cf;font-size:.96rem}
+    .nav-links a{position:relative}
+    .nav-links a::after{
+      content:"";position:absolute;inset:auto 0 -7px 0;height:1px;background:var(--gold);
+      transform:scaleX(0);transition:.25s ease
+    }
+    .nav-links a:hover::after{transform:scaleX(1)}
+    .lang{
+      border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--text);
+      border-radius:999px;padding:9px 13px;cursor:pointer
+    }
+    .hero{
+      min-height:100svh;display:grid;align-items:end;position:relative;padding:145px 0 76px;
+      isolation:isolate
+    }
+    .hero::before{
+      content:"";position:absolute;inset:0;z-index:-3;
+      background:
+        linear-gradient(90deg,rgba(3,3,3,.96) 0%,rgba(3,3,3,.72) 39%,rgba(3,3,3,.18) 68%,rgba(3,3,3,.8) 100%),
+        linear-gradient(0deg,#070707 0%,transparent 30%);
+    }
+    .hero-art{
+      position:absolute;inset:0;z-index:-4;overflow:hidden;
+      background:#111
+    }
+    .hero-art img{
+      width:100%;height:100%;object-fit:cover;object-position:58% 31%;
+      filter:saturate(.82) contrast(1.04) brightness(.66);
+      transform:scale(1.04)
+    }
+    .hero-art::after{
+      content:"";position:absolute;inset:0;
+      background:radial-gradient(circle at 67% 34%,rgba(255,255,255,.10),transparent 23%)
+    }
+    .hero-content{max-width:750px}
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:10px;margin-bottom:22px;
+      color:var(--gold-2);text-transform:uppercase;letter-spacing:.17em;font-size:.78rem;font-weight:600
+    }
+    .eyebrow::before{content:"";width:38px;height:1px;background:var(--gold)}
+    h1{
+      margin:0 0 22px;font-size:clamp(3.4rem,8.5vw,7.8rem);line-height:.88;
+      letter-spacing:-.055em;font-weight:600
+    }
+    .hero p{font-size:clamp(1.1rem,2vw,1.36rem);max-width:650px;color:#d3cec4;margin:0 0 34px}
+    .actions{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 23px;
+      border-radius:999px;border:1px solid var(--line);transition:.22s ease;font-weight:600
+    }
+    .btn.primary{background:var(--text);color:#0a0a0a;border-color:var(--text)}
+    .btn.primary:hover{transform:translateY(-2px);background:white}
+    .btn.ghost{background:rgba(8,8,8,.35);backdrop-filter:blur(8px)}
+    .btn.ghost:hover{border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.07)}
+    section{padding:108px 0}
+    .section-head{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:48px}
+    .kicker{color:var(--gold);font-size:.82rem;text-transform:uppercase;letter-spacing:.16em;font-weight:600;margin-bottom:10px}
+    h2{font-size:clamp(2.25rem,5vw,4.5rem);line-height:1.02;margin:0;letter-spacing:-.04em;font-weight:500}
+    .section-head p{margin:0;color:var(--muted);font-size:1.1rem;max-width:580px}
+    .grid-services{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    .service{
+      min-height:270px;padding:28px;border:1px solid var(--line);border-radius:var(--radius);
+      background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.025));
+      display:flex;flex-direction:column;justify-content:space-between;transition:.25s ease
+    }
+    .service:hover{transform:translateY(-5px);border-color:rgba(198,164,106,.38)}
+    .num{color:var(--gold);font-size:.8rem;letter-spacing:.12em}
+    .service h3{font-size:1.45rem;margin:0 0 9px;font-weight:500}
+    .service p{margin:0;color:var(--muted)}
+    .flagship{
+      background:
+        radial-gradient(circle at 90% 20%,rgba(198,164,106,.11),transparent 30%),
+        #0b0b0c;
+      border-block:1px solid rgba(255,255,255,.08)
+    }
+    .flagship-grid{display:grid;grid-template-columns:minmax(300px,.72fr) 1.28fr;gap:70px;align-items:center}
+    .poster-wrap{position:relative}
+    .poster-wrap::before{
+      content:"";position:absolute;inset:8% -8% -4% 12%;background:rgba(198,164,106,.12);
+      filter:blur(38px);z-index:-1;border-radius:50%
+    }
+    .poster{
+      border-radius:28px;overflow:hidden;border:1px solid rgba(255,255,255,.14);
+      box-shadow:var(--shadow)
+    }
+    .flagship-copy .label{color:var(--gold-2);letter-spacing:.16em;text-transform:uppercase;font-size:.78rem}
+    .flagship-copy h2{margin:12px 0 22px}
+    .flagship-copy p{color:#bdb9b0;font-size:1.12rem;max-width:650px}
+    .chips{display:flex;flex-wrap:wrap;gap:9px;margin:28px 0 34px}
+    .chip{border:1px solid var(--line);border-radius:999px;padding:8px 12px;color:#d8d4cc;font-size:.9rem}
+    .about-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:70px;align-items:start}
+    .quote{
+      font-size:clamp(2rem,4vw,3.7rem);line-height:1.08;letter-spacing:-.035em;margin:0;
+      color:#efe9df
+    }
+    .about-copy{border-top:1px solid var(--line);padding-top:24px}
+    .about-copy p{color:var(--muted);font-size:1.1rem}
+    .contact-shell{
+      display:grid;grid-template-columns:.86fr 1.14fr;gap:48px;padding:42px;border:1px solid var(--line);
+      border-radius:32px;background:linear-gradient(135deg,rgba(255,255,255,.06),rgba(255,255,255,.025));
+      box-shadow:var(--shadow)
+    }
+    .contact-copy p{color:var(--muted);font-size:1.06rem;max-width:420px}
+    .contact-mail{display:inline-block;margin-top:18px;color:var(--gold-2)}
+    form{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .field{display:flex;flex-direction:column;gap:7px}
+    .field.full{grid-column:1/-1}
+    label{font-size:.88rem;color:#c7c2ba}
+    input,textarea{
+      width:100%;border:1px solid var(--line);border-radius:15px;background:rgba(0,0,0,.26);
+      color:var(--text);padding:14px 15px;outline:none;transition:.2s
+    }
+    input:focus,textarea:focus{border-color:rgba(198,164,106,.7);box-shadow:0 0 0 3px rgba(198,164,106,.09)}
+    textarea{min-height:130px;resize:vertical}
+    form .btn{cursor:pointer;width:max-content}
+    .form-note{grid-column:1/-1;color:#817f79;font-size:.78rem;margin:0}
+    footer{padding:44px 0 56px;border-top:1px solid rgba(255,255,255,.08);color:#85817b}
+    .footer-inner{display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .footer-logo{width:120px;opacity:.75}
+    .reveal{opacity:0;transform:translateY(16px);transition:opacity .65s ease,transform .65s ease}
+    .reveal.on{opacity:1;transform:none}
+    @media(max-width:900px){
+      .nav-links{display:none}
+      .brand img{width:122px}
+      .hero{padding-top:120px}
+      .hero::before{background:linear-gradient(0deg,#070707 0%,rgba(5,5,5,.65) 52%,rgba(5,5,5,.26) 100%)}
+      .hero-art img{object-position:58% 25%}
+      .section-head,.flagship-grid,.about-grid,.contact-shell{grid-template-columns:1fr}
+      .flagship-grid{gap:42px}
+      .poster-wrap{max-width:520px;margin-inline:auto}
+      .grid-services{grid-template-columns:1fr 1fr}
+    }
+    @media(max-width:620px){
+      .wrap{width:min(100% - 28px,var(--max))}
+      .nav-inner{height:74px}
+      section{padding:78px 0}
+      .grid-services{grid-template-columns:1fr}
+      .service{min-height:215px}
+      .contact-shell{padding:24px}
+      form{grid-template-columns:1fr}
+      .field.full{grid-column:auto}
+      .form-note{grid-column:auto}
+      .footer-inner{align-items:flex-start;flex-direction:column}
+    }
+    @media(prefers-reduced-motion:reduce){
+      html{scroll-behavior:auto}
+      *,*::before,*::after{animation:none!important;transition:none!important}
+      .reveal{opacity:1;transform:none}
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#top" aria-label="Funtasos Studios">
+        <img src="assets/funtasos-logo.png" alt="Funtasos Studios">
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#services" data-i18n="nav_services">שירותים</a>
+        <a href="#shadowlight" data-i18n="nav_shadowlight">ShadowLight</a>
+        <a href="#about" data-i18n="nav_about">אודות</a>
+        <a href="#contact" data-i18n="nav_contact">יצירת קשר</a>
+      </nav>
+      <button class="lang" id="langToggle" type="button" aria-label="Switch language">EN</button>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-art" aria-hidden="true">
+        <img src="assets/shadowlight-poster.png" alt="">
+      </div>
+      <div class="wrap">
+        <div class="hero-content reveal">
+          <div class="eyebrow" data-i18n="hero_eyebrow">AI MEDIA STUDIO</div>
+          <h1>FUNTASOS<br>STUDIOS</h1>
+          <p data-i18n="hero_text">אולפן מדיה והפקה שמחבר יצירה קולנועית עם כלי AI מתקדמים — לסרטים, סדרות, פרסומות ודיבוב.</p>
+          <div class="actions">
+            <a class="btn primary" href="#contact" data-i18n="hero_cta">בואו ניצור משהו</a>
+            <a class="btn ghost" href="#shadowlight" data-i18n="hero_secondary">לגלות את ShadowLight</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <div class="kicker" data-i18n="services_kicker">What we do</div>
+            <h2 data-i18n="services_title">מהרעיון ועד למסך.</h2>
+          </div>
+          <p data-i18n="services_intro">Funtasos Studios מפתח ומפיק תוכן חזותי בעזרת שילוב בין קריאייטיב, סיפור, בימוי וכלי בינה מלאכותית.</p>
+        </div>
+
+        <div class="grid-services">
+          <article class="service reveal">
+            <div class="num">01</div>
+            <div>
+              <h3 data-i18n="service1_title">סרטים וסדרות</h3>
+              <p data-i18n="service1_text">פיתוח והפקה של יצירות מקוריות — מקונספט, דרך עולם חזותי ועד תוצר קולנועי.</p>
+            </div>
+          </article>
+          <article class="service reveal">
+            <div class="num">02</div>
+            <div>
+              <h3 data-i18n="service2_title">פרסומות</h3>
+              <p data-i18n="service2_text">יצירת סרטי פרסום ותוכן למותגים, עם שפה חזותית בולטת ותהליכי הפקה יעילים.</p>
+            </div>
+          </article>
+          <article class="service reveal">
+            <div class="num">03</div>
+            <div>
+              <h3 data-i18n="service3_title">AI Production</h3>
+              <p data-i18n="service3_text">שילוב כלי AI בתהליכי פיתוח, עיצוב, וידאו ופוסט־פרודקשן — כחלק מתהליך יצירתי מלא.</p>
+            </div>
+          </article>
+          <article class="service reveal">
+            <div class="num">04</div>
+            <div>
+              <h3 data-i18n="service4_title">דיבוב ולוקליזציה</h3>
+              <p data-i18n="service4_text">התאמת הפקות לקהלים ושפות שונות, כולל דיבוב ותהליכי לוקליזציה.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="flagship" id="shadowlight">
+      <div class="wrap flagship-grid">
+        <div class="poster-wrap reveal">
+          <div class="poster">
+            <img src="assets/shadowlight-poster.png" alt="ShadowLight poster">
+          </div>
+        </div>
+        <div class="flagship-copy reveal">
+          <div class="label" data-i18n="flagship_label">Flagship Original Series</div>
+          <h2>ShadowLight</h2>
+          <p data-i18n="flagship_text">סדרת הדגל המקורית של Funtasos Studios. פרויקט שמייצג את החזון של האולפן: יצירה קולנועית שאפתנית, עולם חזותי מובהק ושילוב עמוק של טכנולוגיות AI בתוך תהליך ההפקה.</p>
+          <div class="chips">
+            <span class="chip" data-i18n="chip1">Original IP</span>
+            <span class="chip" data-i18n="chip2">AI-assisted production</span>
+            <span class="chip" data-i18n="chip3">Cinematic storytelling</span>
+          </div>
+          <a class="btn ghost" href="#contact" data-i18n="flagship_cta">לשיתופי פעולה ופרטים</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="wrap about-grid">
+        <div class="reveal">
+          <div class="kicker" data-i18n="about_kicker">About the studio</div>
+          <p class="quote" data-i18n="about_quote">סיפורים קודם. טכנולוגיה כשצריך. תוצאה שנראית כמו קולנוע.</p>
+        </div>
+        <div class="about-copy reveal">
+          <h2 data-i18n="about_title">Funtasos Studios</h2>
+          <p data-i18n="about_p1">Funtasos Studios הוא אולפן מדיה מבוסס AI בבעלות לירי אור, המתמחה ביצירה והפקה של סרטים, סדרות, פרסומות ותוכן מדובב.</p>
+          <p data-i18n="about_p2">המטרה היא לא “לעשות AI”, אלא להשתמש בטכנולוגיה כדי להרחיב את מה שאפשר ליצור — מהר יותר, בגמישות גדולה יותר, ובלי לוותר על זהות, סיפור ושפה קולנועית.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="wrap">
+        <div class="contact-shell reveal">
+          <div class="contact-copy">
+            <div class="kicker" data-i18n="contact_kicker">Contact</div>
+            <h2 data-i18n="contact_title">יש לכם פרויקט?</h2>
+            <p data-i18n="contact_text">ספרו לנו בקצרה מה אתם רוצים ליצור. השאירו פרטים ונחזור אליכם.</p>
+            <a class="contact-mail" href="mailto:info@funtasos.com">info@funtasos.com</a>
+          </div>
+
+          <form action="https://formsubmit.co/info@funtasos.com" method="POST">
+            <input type="hidden" name="_subject" value="New inquiry from Funtasos.com">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_next" value="https://funtasos.com/thanks.html">
+
+            <div class="field">
+              <label for="name" data-i18n="form_name">שם</label>
+              <input id="name" name="name" type="text" required autocomplete="name">
+            </div>
+            <div class="field">
+              <label for="phone" data-i18n="form_phone">טלפון</label>
+              <input id="phone" name="phone" type="tel" autocomplete="tel">
+            </div>
+            <div class="field full">
+              <label for="email" data-i18n="form_email">אימייל</label>
+              <input id="email" name="email" type="email" required autocomplete="email">
+            </div>
+            <div class="field full">
+              <label for="message" data-i18n="form_message">על מה תרצו לדבר?</label>
+              <textarea id="message" name="message" required></textarea>
+            </div>
+            <button class="btn primary" type="submit" data-i18n="form_submit">שליחת פרטים</button>
+            
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <img class="footer-logo" src="assets/funtasos-logo.png" alt="Funtasos Studios">
+      <div>© <span id="year"></span> Funtasos Studios. <span data-i18n="footer_rights">כל הזכויות שמורות.</span></div>
+    </div>
+  </footer>
+
+  <script>
+    const copy = {
+      he:{
+        nav_services:"שירותים",nav_shadowlight:"ShadowLight",nav_about:"אודות",nav_contact:"יצירת קשר",
+        hero_eyebrow:"AI MEDIA STUDIO",
+        hero_text:"אולפן מדיה והפקה שמחבר יצירה קולנועית עם כלי AI מתקדמים — לסרטים, סדרות, פרסומות ודיבוב.",
+        hero_cta:"בואו ניצור משהו",hero_secondary:"לגלות את ShadowLight",
+        services_kicker:"What we do",services_title:"מהרעיון ועד למסך.",
+        services_intro:"Funtasos Studios מפתח ומפיק תוכן חזותי בעזרת שילוב בין קריאייטיב, סיפור, בימוי וכלי בינה מלאכותית.",
+        service1_title:"סרטים וסדרות",service1_text:"פיתוח והפקה של יצירות מקוריות — מקונספט, דרך עולם חזותי ועד תוצר קולנועי.",
+        service2_title:"פרסומות",service2_text:"יצירת סרטי פרסום ותוכן למותגים, עם שפה חזותית בולטת ותהליכי הפקה יעילים.",
+        service3_title:"AI Production",service3_text:"שילוב כלי AI בתהליכי פיתוח, עיצוב, וידאו ופוסט־פרודקשן — כחלק מתהליך יצירתי מלא.",
+        service4_title:"דיבוב ולוקליזציה",service4_text:"התאמת הפקות לקהלים ושפות שונות, כולל דיבוב ותהליכי לוקליזציה.",
+        flagship_label:"Flagship Original Series",
+        flagship_text:"סדרת הדגל המקורית של Funtasos Studios. פרויקט שמייצג את החזון של האולפן: יצירה קולנועית שאפתנית, עולם חזותי מובהק ושילוב עמוק של טכנולוגיות AI בתוך תהליך ההפקה.",
+        chip1:"Original IP",chip2:"AI-assisted production",chip3:"Cinematic storytelling",flagship_cta:"לשיתופי פעולה ופרטים",
+        about_kicker:"About the studio",about_quote:"סיפורים קודם. טכנולוגיה כשצריך. תוצאה שנראית כמו קולנוע.",
+        about_title:"Funtasos Studios",
+        about_p1:"Funtasos Studios הוא אולפן מדיה מבוסס AI בבעלות לירי אור, המתמחה ביצירה והפקה של סרטים, סדרות, פרסומות ותוכן מדובב.",
+        about_p2:"המטרה היא לא “לעשות AI”, אלא להשתמש בטכנולוגיה כדי להרחיב את מה שאפשר ליצור — מהר יותר, בגמישות גדולה יותר, ובלי לוותר על זהות, סיפור ושפה קולנועית.",
+        contact_kicker:"Contact",contact_title:"יש לכם פרויקט?",contact_text:"ספרו לנו בקצרה מה אתם רוצים ליצור. השאירו פרטים ונחזור אליכם.",
+        form_name:"שם",form_phone:"טלפון",form_email:"אימייל",form_message:"על מה תרצו לדבר?",form_submit:"שליחת פרטים",
+        
+        footer_rights:"כל הזכויות שמורות."
+      },
+      en:{
+        nav_services:"Services",nav_shadowlight:"ShadowLight",nav_about:"About",nav_contact:"Contact",
+        hero_eyebrow:"AI MEDIA STUDIO",
+        hero_text:"A media and production studio combining cinematic craft with advanced AI tools — for films, series, commercials and dubbing.",
+        hero_cta:"Start a project",hero_secondary:"Discover ShadowLight",
+        services_kicker:"What we do",services_title:"From idea to screen.",
+        services_intro:"Funtasos Studios develops and produces visual content through a blend of creative direction, storytelling, filmmaking and artificial intelligence.",
+        service1_title:"Films & Series",service1_text:"Development and production of original work — from concept and visual world-building to a cinematic final product.",
+        service2_title:"Commercials",service2_text:"Advertising films and branded content with a distinct visual language and efficient production workflows.",
+        service3_title:"AI Production",service3_text:"AI integrated into development, design, video and post-production as part of a complete creative process.",
+        service4_title:"Dubbing & Localization",service4_text:"Adapting productions for different audiences and languages, including dubbing and localization workflows.",
+        flagship_label:"Flagship Original Series",
+        flagship_text:"The flagship original series from Funtasos Studios. A project that represents the studio’s vision: ambitious cinematic storytelling, a distinctive visual world, and deep integration of AI technologies throughout the production process.",
+        chip1:"Original IP",chip2:"AI-assisted production",chip3:"Cinematic storytelling",flagship_cta:"Collaborations & inquiries",
+        about_kicker:"About the studio",about_quote:"Story first. Technology where it matters. A result that feels cinematic.",
+        about_title:"Funtasos Studios",
+        about_p1:"Funtasos Studios is an AI-powered media studio owned by Liri Or, specializing in the creation and production of films, series, commercials and dubbed content.",
+        about_p2:"The goal is not to “make AI.” It is to use technology to expand what can be created — faster and more flexibly, without compromising identity, story or cinematic language.",
+        contact_kicker:"Contact",contact_title:"Have a project in mind?",contact_text:"Tell us briefly what you want to create. Leave your details and we’ll get back to you.",
+        form_name:"Name",form_phone:"Phone",form_email:"Email",form_message:"What would you like to create?",form_submit:"Send inquiry",
+        
+        footer_rights:"All rights reserved."
+      }
+    };
+
+    const html = document.documentElement;
+    const toggle = document.getElementById("langToggle");
+    let lang = localStorage.getItem("funtasosLang") || "he";
+
+    function applyLanguage(next){
+      lang = next;
+      const isHe = lang === "he";
+      html.lang = lang;
+      html.dir = isHe ? "rtl" : "ltr";
+      toggle.textContent = isHe ? "EN" : "עב";
+      document.querySelectorAll("[data-i18n]").forEach(el=>{
+        const key = el.dataset.i18n;
+        if(copy[lang][key]) el.textContent = copy[lang][key];
+      });
+      localStorage.setItem("funtasosLang", lang);
+    }
+    toggle.addEventListener("click",()=>applyLanguage(lang==="he"?"en":"he"));
+    applyLanguage(lang);
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const observer = new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){ entry.target.classList.add("on"); observer.unobserve(entry.target); }
+      });
+    },{threshold:.12});
+    document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
+  </script>
+</body>
+</html>
